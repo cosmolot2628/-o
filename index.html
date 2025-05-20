@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="True" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="COSMOLOT MARKET - &pcy;&lcy;&acy;&tcy;&fcy;&ocy;&rcy;&mcy;&acy; &pcy;&rcy;&ocy;&vcy;&iecy;&rcy;&iecy;&ncy;&ncy;&ycy;&khcy; &mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ocy;&vcy; &icy; &rcy;&iecy;&kcy;&lcy;&acy;&mcy;&ycy;" name="description"/>
+  <meta content="&mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ycy;, &rcy;&iecy;&kcy;&lcy;&acy;&mcy;&acy;, &Pcy;&ocy;&lcy;&softcy;&shcy;&acy;, &Ucy;&kcy;&rcy;&acy;&icy;&ncy;&acy;, &Gcy;&iecy;&rcy;&mcy;&acy;&ncy;&icy;&yacy;" name="keywords"/>
+  <title>
+   COSMOLOT MARKET
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0a0f2c;
+      color: #f1f1f1;
+      overflow-x: hidden;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: -1;
+    }
+
+    .galaxy-overlay {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 50%, rgba(16,23,42,0.8) 20%, rgba(10,15,44,0.9) 70%);
+      z-index: -1;
+    }
+
+    .planet {
+      position: absolute;
+      width: 120px;
+      animation: orbit 40s linear infinite;
+      filter: drop-shadow(0 0 15px rgba(0,240,255,0.6));
+    }
+
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(300px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
+    }
+
+    header {
+      padding: 120px 20px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, 
+        rgba(0,240,255,0.1) 0%,
+        rgba(16,23,42,0.8) 50%,
+        rgba(0,240,255,0.1) 100%
+      );
+      animation: nebula 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes nebula {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4em;
+      color: #00f0ff;
+      text-shadow: 0 0 30px #00f0ff;
+      position: relative;
+      animation: title-glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes title-glow {
+      0% { text-shadow: 0 0 20px #00f0ff; }
+      100% { text-shadow: 0 0 40px #00f0ff, 0 0 60px #00f0ff; }
+    }
+
+    header p {
+      font-size: 1.4em;
+      margin-top: 20px;
+      color: #cdd9e5;
+      position: relative;
+      text-shadow: 0 0 10px rgba(205,217,229,0.5);
+    }
+
+    .astronaut {
+      width: 160px;
+      position: absolute;
+      right: 5%;
+      top: 30%;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(0,240,255,0.5));
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-30px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(-5deg); }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      background: rgba(16,23,42,0.95);
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,240,255,0.2);
+    }
+
+    nav a {
+      color: #00f0ff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border: 2px solid #00f0ff;
+      border-radius: 50px;
+      transition: all 0.6s ease;
+      position: relative;
+      overflow: hidden;
+      background: rgba(16,23,42,0.6);
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,240,255,0.2),
+        transparent
+      );
+      transition: all 0.8s ease;
+    }
+
+    nav a:hover {
+      background: #00f0ff;
+      color: #0a0f2c;
+      box-shadow: 0 0 30px #00f0ff;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      text-align: center;
+      color: #00f0ff;
+      margin-bottom: 50px;
+      text-shadow: 0 0 20px rgba(0,240,255,0.5);
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+      box-shadow: 0 0 15px #00f0ff;
+    }
+
+    .shop-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .shop-list a {
+      display: block;
+      padding: 25px;
+      background: linear-gradient(145deg, rgba(28,31,47,0.8), rgba(42,45,66,0.9));
+      border-radius: 15px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0,240,255,0.3);
+      transition: all 0.6s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,240,255,0.3);
+    }
+
+    .shop-list a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,240,255,0.1),
+        transparent
+      );
+      transition: all 0.8s ease;
+    }
+
+    .shop-list a:hover {
+      transform: translateY(-10px);
+      background: #00f0ff;
+      color: #000;
+      box-shadow: 0 0 30px #00f0ff;
+    }
+
+    .shop-list a:hover::before {
+      left: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 1em;
+      color: #888;
+      background: rgba(10,15,44,0.9);
+      border-top: 1px solid rgba(0,240,255,0.2);
+      backdrop-filter: blur(5px);
+      margin-top: 100px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.5em; }
+      .astronaut { width: 120px; right: 10px; }
+      nav { gap: 10px; padding: 15px; }
+      h2 { font-size: 2em; }
+      .shop-list { grid-template-columns: 1fr; }
+    }
+  
+
+html { scroll-behavior: smooth; }
+  </style>
+  <meta content="public, max-age=86400" http-equiv="Cache-Control"/>
+ </head>
+ <body>
+  <canvas id="stars">
+  </canvas>
+  <div class="galaxy-overlay">
+  </div>
+  <header>
+   <h1>
+    COSMOLOT MARKET
+   </h1>
+   <p>
+    &Pcy;&lcy;&acy;&tcy;&fcy;&ocy;&rcy;&mcy;&acy; &pcy;&rcy;&ocy;&vcy;&iecy;&rcy;&iecy;&ncy;&ncy;&ycy;&khcy; &mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ocy;&vcy; &icy; &rcy;&iecy;&kcy;&lcy;&acy;&mcy;&ycy;
+   </p>
+  </header>
+  <nav role="navigation">
+   <a href="#poland">
+    &Pcy;&ocy;&lcy;&softcy;&shcy;&acy;
+   </a>
+   <a href="#ukraine">
+    &Ucy;&kcy;&rcy;&acy;&icy;&ncy;&acy;
+   </a>
+   <a href="#germany">
+    &Gcy;&iecy;&rcy;&mcy;&acy;&ncy;&icy;&yacy;
+   </a>
+   <a href="#price">
+    &Pcy;&rcy;&acy;&jcy;&scy;
+   </a>
+   <a href="#contacts">
+    &Kcy;&ocy;&ncy;&tcy;&acy;&kcy;&tcy;&ycy;
+   </a>
+  </nav>
+  <main role="main">
+   <section id="poland">
+    <h2>
+     VIP &Mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ycy; &mdash; &Pcy;&ocy;&lcy;&softcy;&shcy;&acy;
+    </h2>
+    <div class="shop-list">
+     <a href="http://t.me/Cosmolotadmin1" target="_blank">
+      RC  POLAND
+     </a>
+     <a href="http://t.me/debarter" target="_blank">
+      DONALD DRUG OPT
+     </a>
+     <a href="http://t.me/trueshop" target="_blank">
+      TRUE SHOP
+     </a>
+     <a href="http://t.me/Luxeua" target="_blank">
+      Legioner Shop
+     </a>
+     <a href="http://t.me/Com_J_City" target="_blank">
+      Joker Shop
+     </a>
+     <a href="https://t.me/+Co_nqeZGSvY1OWI0" target="_blank">
+      EUPHORIA
+     </a>
+     <a href="http://t.me/Comics_J1" target="_blank">
+      Joker shop Warszawa
+     </a>
+     <a href="http://t.me/trueshop" target="_blank">
+      TRUE SHOP WARSZAWA
+     </a>
+     <a href="http://t.me/optoBP_bot" target="_blank">
+      BLACK PANTERA WORK
+     </a>
+     <a href="http://t.me/trueshopa" target="_blank">
+      TRUE SHOP KRKWROGDAPOZLOD
+     </a>
+     <a href="https://t.me/+AJnH8JdgezVjYjYy" target="_blank">
+      Sklep Diabla shop
+     </a>
+     <a href="http://t.me/Kurwabobersklep" target="_blank">
+      Kurwa Bober shop
+     </a>
+     <a href="http://t.me/Top_seller_skunk_bot" target="_blank">
+      Skunk shop
+     </a>
+     <a href="http://t.me/krkn_supportrc" target="_blank">
+      Kraken shop
+     </a>
+     <a href="http://t.me/dhlpl" target="_blank">
+      Dhl Pl shop
+     </a>
+     <a href="http://t.me/OPERATORCOSMOLOT" target="_blank">
+      Cosmolot shop
+     </a>
+     <a href="http://t.me/popeyesh" target="_blank">
+      Popeye shop warszawa
+     </a>
+     <a href="https://t.me/SYETA_2024" target="_blank">
+      SUETA SHOP OPT
+     </a>
+     <a href="http://ddrug.shop" target="_blank">
+      Dr Drug shop
+     </a>
+     <a href="http://t.me/Zavod_oper" target="_blank">
+      Zavod TGK WAX
+     </a>
+     <a href="http://t.me/x9x9x9" target="_blank">
+      Easu Shop
+     </a>
+     <a href="http://t.me/xxxbestfastx_bot" target="_blank">
+      XXX Store Shop
+     </a>
+     <a href="http://t.me/Familyoutletplbot" target="_blank">
+      Family Outlet shop
+     </a>
+     <a href="http://t.me/ClickNjoyS" target="_blank">
+      Clicknjoy shop
+     </a>
+     <a href="http://t.me/evilcorpoper" target="_blank">
+      Evilcorp shop
+     </a>
+     <a href="http://t.me/operbobr" target="_blank">
+      Krik Bobra
+     </a>
+     <a href="http://t.me/FirstOceanLiners2020" target="_blank">
+      First Ocen Liner shop
+     </a>
+     <a href="http://t.me/Ck_sol10_bot" target="_blank">
+      Hydro Fast shop
+     </a>
+     <a href="http://t.me/mystery_shack_operator_Lodz" target="_blank">
+      Mystery chack shop
+     </a>
+     <a href="http://t.me/rower20" target="_blank">
+      Rower shop
+     </a>
+     <a href="http://t.me/dreddd0000" target="_blank">
+      Dream Market shop
+     </a>
+     <a href="http://t.me/UnderBoss_2Bot" target="_blank">
+      OPG UNDER
+     </a>
+     <a href="http://t.me/opamazon" target="_blank">
+      Amazon shop
+     </a>
+     <a href="http://t.me/a_eto_onN" target="_blank">
+      Shop on Orlen
+     </a>
+     <a href="http://t.me/atb_operblack" target="_blank">
+      Atb shop
+     </a>
+     <a href="http://t.me/OperOniShop" target="_blank">
+      ONI SHOP
+     </a>
+     <a href="http://t.me/Imperia_PL" target="_blank">
+      Imperia pl opt
+     </a>
+     <a href="http://t.me/buybug" target="_blank">
+      Cyber Drag Shop
+     </a>
+     <a href="http://t.me/OperatorChillDay" target="_blank">
+      ChillDay shop
+     </a>
+     <a href="http://t.me/skarbb_cc" target="_blank">
+      Skarb CC
+     </a>
+     <a href="http://t.me/pass_gold" target="_blank">
+      GOLD PASS shop
+     </a>
+     <a href="http://t.me/boilerroom_operator" target="_blank">
+      Boiler shop
+     </a>
+     <a href="http://t.me/Alpha_Poznan" target="_blank">
+      Alpha pap shop
+     </a>
+     <a href="https://t.me/+kT1r_e53nLE2N2Qy" target="_blank">
+      Euforia shop
+     </a>
+     <a href="https://t.me/teameviltut_bot" target="_blank">
+      Devil shop
+     </a>
+    </div>
+   </section>
+   <section id="ukraine">
+    <h2>
+     VIP &Mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ycy; &mdash; &Ucy;&kcy;&rcy;&acy;&icy;&ncy;&acy;
+    </h2>
+    <div class="shop-list">
+     <a href="http://t.me/Cosmolotadmin1" target="_blank">
+      RC UKAINA
+     </a>
+     <a href="http://t.me/Oper_AbSolut" target="_blank">
+      ABSOLUTE SHOP
+     </a>
+     <a href="https://tom24.vip/" target="_blank">
+      TOM24 VIP
+     </a>
+     <a href="http://t.me/Cosmolotadmin1" target="_blank">
+      TOP SHOP UKRAIN
+     </a>
+     <a href="http://t.me/optoBP_bot" target="_blank">
+      BLACK PANTERA
+     </a>
+     <a href="http://t.me/opicosmolotstore" target="_blank">
+      Cosmolot Store shop
+     </a>
+     <a href="https://venera.top/" target="_blank">
+      Venera Market opt shop
+     </a>
+     <a href="http://t.me/Hartwell_White_bot" target="_blank">
+      Hartwell White shop
+     </a>
+     <a href="https://larek.top/" target="_blank">
+      Larec RC shop
+     </a>
+     <a href="https://imp.pw/" target="_blank">
+      Imperial Lab
+     </a>
+     <a href="http://tiger.miami/" target="_blank">
+      Tiger Miami shop
+     </a>
+     <a href="http://t.me/ErebusSyndicate_bot" target="_blank">
+      Erebus Sindikate
+     </a>
+     <a href="http://t.me/mcdonald_kust" target="_blank">
+      McDonald shop
+     </a>
+     <a href="https://www.kraken24.vip/" target="_blank">
+      Kraken shop
+     </a>
+     <a href="https://t.me/WLSTT_Bot" target="_blank">
+      Wall Street shop
+     </a>
+     <a href="https://t.me/marvin_opt" target="_blank">
+      Marvin opt
+     </a>
+     <a href="http://www.netrc.vip/" target="_blank">
+      Netflix shop
+     </a>
+    </div>
+   </section>
+   <section id="germany">
+    <h2>
+     VIP &Mcy;&acy;&gcy;&acy;&zcy;&icy;&ncy;&ycy; &mdash; &Gcy;&iecy;&rcy;&mcy;&acy;&ncy;&icy;&yacy;
+    </h2>
+    <div class="shop-list">
+     <a href="http://t.me/Cosmolotadmin1" target="_blank">
+      RC GERMANY
+     </a>
+     <a href="https://t.me/kikzl" target="_blank">
+      Bundestuff shop Germany
+     </a>
+     <a href="https://t.me/mega_helpers" target="_blank">
+      MEGA.DE shop Germany
+     </a>
+    </div>
+   </section>
+   <section id="price">
+    <h2>
+     &Pcy;&rcy;&acy;&jcy;&scy;-&lcy;&icy;&scy;&tcy;
+    </h2>
+    <p style="text-align:center; font-size: 1.2em; max-width: 800px; margin: 0 auto;">
+     &Dcy;&lcy;&yacy; &pcy;&ocy;&lcy;&ucy;&chcy;&iecy;&ncy;&icy;&yacy; &acy;&kcy;&tcy;&ucy;&acy;&lcy;&softcy;&ncy;&ycy;&khcy; &tscy;&iecy;&ncy; &icy; &ucy;&scy;&lcy;&ocy;&vcy;&icy;&jcy; &mdash; &ncy;&acy;&pcy;&icy;&shcy;&icy;&tcy;&iecy; &ncy;&acy;&shcy;&iecy;&mcy;&ucy; &mcy;&iecy;&ncy;&iecy;&dcy;&zhcy;&iecy;&rcy;&ucy;:
+     <br/>
+     <a href="http://t.me/Cosmolotadmin1" style="color:#00f0ff; text-decoration: none; font-weight: 700; margin-top: 15px; display: inline-block;">
+      @Cosmolotadmin1
+     </a>
+    </p>
+   </section>
+   <section id="contacts">
+    <h2>
+     &Kcy;&ocy;&ncy;&tcy;&acy;&kcy;&tcy;&ycy;
+    </h2>
+    <div style="text-align:center;">
+     <p style="font-size: 1.2em; margin-bottom: 20px;">
+      &Tcy;&iecy;&khcy;&ncy;&icy;&chcy;&iecy;&scy;&kcy;&acy;&yacy; &pcy;&ocy;&dcy;&dcy;&iecy;&rcy;&zhcy;&kcy;&acy; &dcy;&ocy;&scy;&tcy;&ucy;&pcy;&ncy;&acy; 24/7
+     </p>
+     <a href="https://t.me/+jFZVo0uQgNc4YWE8" style="display: inline-block; 
+                padding: 15px 40px;
+                background: #00f0ff;
+                color: #000;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 700;
+                box-shadow: 0 0 25px #00f0ff;
+                transition: 0.3s;">
+      &Ncy;&acy;&pcy;&icy;&scy;&acy;&tcy;&softcy; &vcy; Telegram
+     </a>
+    </div>
+   </section>
+  </main>
+  <footer>
+   &copy;  COSMOLOT MARKET. &Vcy;&scy;&iecy; &pcy;&rcy;&acy;&vcy;&acy; &zcy;&acy;&shchcy;&icy;&shchcy;&iecy;&ncy;&ycy;.
+  </footer>
+  <script>
+   const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let w, h, stars;
+
+  // Инициализация звездного неба
+  function init() {
+    resize();
+    createStars();
+    animate();
+    let resizeTimeout; window.addEventListener('resize', () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(resize, 300); });
+  }
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    const starCount = window.innerWidth < 768 ? 200 : 400;
+    for(let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.5,
+        d: Math.random() * 0.8 + 0.2,
+        glow: Math.random() * 0.5 + 0.5
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = '#00f0ff';
+    
+    stars.forEach(star => {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 240, 255, ${star.glow})`;
+      ctx.fill();
+      
+      // Анимация мерцания
+      star.glow += (Math.random() - 0.5) * 0.1;
+      star.glow = Math.max(0.3, Math.min(1, star.glow));
+    });
+    
+    moveStars();
+  }
+
+  function moveStars() {
+    stars.forEach(star => {
+      star.y += star.d;
+      if(star.y > h) {
+        star.y = 0;
+        star.x = Math.random() * w;
+      }
+    });
+  }
+
+  function animate() {
+    drawStars();
+    setTimeout(() => requestAnimationFrame(animate), 33);
+  }
+
+  init();
+  </script>
+ </body>
+</html>
